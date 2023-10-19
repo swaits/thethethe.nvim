@@ -1,14 +1,15 @@
 # thethethe
 
-This is an autocorrect plugin for common misspellings and typos. If you type 'teh', neovim will automatically correct it to 'the'.
+This is a Neovim plugin to autocorrect common misspellings and typos. If you
+type _teh_, neovim will automatically correct it to _the_.
 
-It's based on [vim-autocorrect](https://github.com/panozzaj/vim-autocorrect), but designed for Neovim.
-
-It defers loading the dictionary, so it doesn't delay startup time.
+It's based on [vim-autocorrect](https://github.com/panozzaj/vim-autocorrect),
+but designed for Neovim. Unlike that plugin, this loads the dictionary in the
+background, so it doesn't delay startup time.
 
 ## Installing
 
-### [lazy](https://github.com/folke/lazy.nvim)
+### [lazy](https://github.com/folke/lazy.nvim) (recommended)
 
 ```lua
 {
@@ -40,8 +41,15 @@ lua require("thethethe").setup()
 The default configuration options are listed below:
 
 ```lua
-require("thethethe").setup({
+opts = {
   -- Time (milliseconds) to wait before loading abbreviations
   delay_ms = 2000
-})
+}
 ```
+
+## Future Directions
+
+- Allow specifying a custom dictionary files
+- List custom dictionary entries directly in `opts {}`
+- Split current (large!) dictionary into something like small, medium, large
+- Recategorize current dictionary "English" and add options to include non-English dictionaries
