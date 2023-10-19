@@ -4,8 +4,8 @@ This is a Neovim plugin to autocorrect common misspellings and typos. If you
 type _teh_, neovim will automatically correct it to _the_.
 
 It's based on [vim-autocorrect](https://github.com/panozzaj/vim-autocorrect),
-but designed for Neovim and written in pure Lua. Unlike that plugin, this loads
-the dictionary in the background, so it doesn't delay startup time.
+but designed for Neovim and written in pure Lua. It also loads the dictionary
+in the background, so it doesn't delay startup time.
 
 ## Installing
 
