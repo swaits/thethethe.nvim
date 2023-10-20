@@ -1,4 +1,4 @@
-# thethethe
+# thethethe.nvim
 
 This is a Neovim plugin to autocorrect common misspellings and typos. If you
 type _teh_, neovim will automatically correct it to _the_.
@@ -49,7 +49,7 @@ opts = {
 
 ## Future Directions
 
-- Allow specifying a custom dictionary files
+- Allow specifying custom dictionary files
 - List custom dictionary entries directly in `opts {}`
 - Split current (large!) dictionary into something like small, medium, large
 - Recategorize current dictionary "English" and add options to include non-English dictionaries
