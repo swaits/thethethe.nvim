@@ -7,6 +7,10 @@ It's based on [vim-autocorrect](https://github.com/panozzaj/vim-autocorrect),
 but designed for Neovim and written in pure Lua. It also loads the dictionary
 in the background, so it doesn't delay startup time.
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/WtUg846Z7wNiMrzPgjod1picV.svg)](https://asciinema.org/a/WtUg846Z7wNiMrzPgjod1picV)
+
 ## Installing
 
 ### [lazy](https://github.com/folke/lazy.nvim) (recommended)
