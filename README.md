@@ -18,6 +18,8 @@ in the background, so it doesn't delay startup time.
 ```lua
 {
   "https://git.sr.ht/~swaits/thethethe.nvim",
+  lazy = true,
+  event = "VeryLazy",
   opts = { },
 }
 ```
