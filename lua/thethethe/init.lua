@@ -1,8 +1,5 @@
 local M = {}
 
--- load our default configuration
-local config = require("thethethe.config")
-
 -- load abbreviations.dict
 local function load_abbreviations()
   -- load our dictionary string
@@ -25,6 +22,9 @@ end
 
 -- create our exported setup() function
 function M.setup(opts)
+  -- load our default configuration
+  local config = require("thethethe.config")
+
   -- check for default overrides passed in
   if opts then
     config.delay_ms = opts.delay_ms or config.delay_ms
