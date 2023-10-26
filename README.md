@@ -24,7 +24,7 @@ in the background, so it doesn't delay startup time.
 }
 ```
 
-### [packer](https://github.com/wbthomason/packer.nvim)
+### [pckr](https://github.com/lewis6991/pckr.nvim)
 
 ```lua
 {
