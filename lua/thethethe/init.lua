@@ -1,22 +1,30 @@
 local M = {}
 
--- load abbreviations.dict
-local function load_abbreviations()
-  -- load our dictionary string
-  local s = require("thethethe.dictionary")
+--- loads abbreviations asynchronously in a coroutine context
+---
+--- A coroutine is used so that the large number of abbreviations can be
+--- loaded without affecting editor responsiveness.
+---
+--- As we loop over the dictionary, each abbreviation is "scheduled" for creation.
+--- The loop will not continue until the previously scheduled abbreviation is added.
+--- @async
+local function load_abbreviations_co()
+  local this_co = coroutine.running()
 
-  -- split dictionary by lines
-  for line in s:gmatch("([^\n]*)\n?") do
-    -- split each line by the colon
-    local parts = {}
-    for part in line:gmatch("[^:]+") do
-      table.insert(parts, part)
-    end
+  -- load our dictionary
+  local dict = require("thethethe.dictionary")
 
-    if #parts == 2 and parts[1] and parts[2] then
-      -- Add abbreviation via `iabbrev` (through vim.cmd)
-      vim.cmd(string.format("iabbrev %s %s", parts[1], parts[2]))
-    end
+  local opts = {}
+  for key, value in pairs(dict) do
+    -- perform this action some time later
+    vim.schedule(function()
+      vim.api.nvim_set_keymap("ia", key, value, opts)
+      -- resume the coroutine, so we can add the next abbreviation
+      coroutine.resume(this_co)
+    end)
+
+    -- halt the coroutine until the scheduled action above is complete,
+    coroutine.yield()
   end
 end
 
@@ -31,7 +39,14 @@ function M.setup(opts)
   end
 
   -- execute the function after config.delay_ms
-  vim.defer_fn(load_abbreviations, config.delay_ms)
+  vim.defer_fn(function()
+    local ok, result = pcall(coroutine.wrap(load_abbreviations_co))
+    if ok == true then
+      return
+    end
+
+    vim.notify("error while loading abbreviations: " .. result, vim.log.levels.ERROR)
+  end, config.delay_ms)
 end
 
 return M
